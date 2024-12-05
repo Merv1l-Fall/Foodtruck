@@ -1,0 +1,12 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root{
+	--mainGreen:#2a6d4c;
+	--lightGray:#969696;
+	--darkGray:#3f3f3f;
+	--whiteColor:#d6d6d6;
+}
