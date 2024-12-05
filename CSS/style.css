@@ -2,11 +2,15 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-size: 16px;
+	font-family: "Fira Sans", sans-serif;
 }
 
 :root{
-	--mainGreen:#2a6d4c;
-	--lightGray:#969696;
-	--darkGray:#3f3f3f;
-	--whiteColor:#d6d6d6;
+	--mainGreen:#489078;
+	--lightGray:#605858;
+	--darkGray:#353131;
+	--mainWhite:#e9e8e5;
+	--selectedGray:#353131;
+	--mainRed:#EB5757;
 }
