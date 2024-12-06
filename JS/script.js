@@ -3,17 +3,17 @@ const TestKeyButton = document.querySelector('.cart-button')
 
 
 
-const APIkey = '';
+const APIkey = 'yum-JAaNDtW2DyvIHS96';
 let url = 'https://fdnzawlcf6.execute-api.eu-north-1.amazonaws.com/keys';
 
 
 TestKeyButton.addEventListener('click', ()  =>{
-	getApiKey(url);
+	// getApiKey(url);
 })
 async function getApiKey(url){
 	try{
 		const response = await fetch(url, {
-			method: 'GET',
+			method: 'POST',
 			headers:{
 				'Content-Type': 'application/json',
 			}
