@@ -5,31 +5,31 @@ let wontonItems = [];
 const TestKeyButton = document.querySelector('.cart-button')
 
 
-TestKeyButton.addEventListener('click', ()  =>{
-	getWontonItems(menuUrl);
-})
+// TestKeyButton.addEventListener('click', ()  =>{
+// 	getWontonItems(menuUrl);
+// })
 
 async function getWontonItems(menuUrl){
 	try{
 		const response = await fetch(menuUrl, {
 			method: 'GET',
 			headers:{
-					// "Authorization": `Bearer ${APIkey}`,
 					'x-zocom': APIkey,
 					'Content-Type': 'application/json',
-				}
+				},
 		});
 		if(!response.ok){
 			throw new Error(`HTTP error! Status: ${response.status}`)
 		}
 		const data = await response.json();
 		wontonItems = data;
-		console.log(wontonItems);
+		return data.items;
 	}
 	catch(error) {
-		console.error('Error getting menu', error);
+		console.log('Error getting menu', error);
+		return [];
 	}
 }
 
 
-export{wontonItems};
+export{ getWontonItems };

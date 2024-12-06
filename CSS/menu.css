@@ -42,6 +42,7 @@
 
 .menu-item-inner{
 	display: flex;
+	gap: 0.3rem;
 }
 
 .menu-item-inner *{
