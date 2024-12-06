@@ -28,3 +28,29 @@
 	font-size: 2rem;
 	text-shadow: 1px 1.5px 1px rgba(0, 0, 0, 0.911);
 }
+
+#menu-container{
+	border-radius: 0.3rem;
+	overflow: hidden;
+}
+
+.menu-item{
+	background-color: var(--lightGray);
+	color: var(--mainWhite);
+	padding: 1rem;
+}
+
+.menu-item-inner{
+	display: flex;
+}
+
+.menu-item-inner *{
+	font-size: 1.2rem;
+	font-weight: bold;
+	margin-bottom: 0.4rem;
+}
+
+.dotted-divider{
+	border-bottom: dotted 2px var(--mainWhite);
+	flex-grow: 1;
+}
