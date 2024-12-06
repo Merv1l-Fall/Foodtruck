@@ -1,15 +1,17 @@
-import { getWontonItems } from "./fetching.js";
+import { getMenuItems } from "./fetching.js";
 
 const menuContainer = document.querySelector('#menu-container')
+const wonton = 'wonton'
+const drink = 'drink'
+const dip = 'dip'
 
+async function fetchMenuItems(type) {
+	const Url = `https://fdnzawlcf6.execute-api.eu-north-1.amazonaws.com/menu?type=${type}`;
+	const items = await getMenuItems(Url);
+	console.log(items);
 
-async function fetchMenuItems() {
-	const menuUrl = 'https://fdnzawlcf6.execute-api.eu-north-1.amazonaws.com/menu?type=wonton';
-	const wontonItems = await getWontonItems(menuUrl);
-	console.log(wontonItems);
-
-	if(wontonItems && wontonItems.length > 0){
-		createMenu(wontonItems);
+	if(type == wonton && items.length > 0){
+		createMenu(items);
 	}
 	else{
 		console.log('error getting menu items');
@@ -51,4 +53,6 @@ function createMenu(items){
 	})
 }
 
-fetchMenuItems();
+fetchMenuItems(wonton);
+fetchMenuItems(drink);
+fetchMenuItems(dip);

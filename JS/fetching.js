@@ -1,17 +1,9 @@
 const APIkey = 'yum-JAaNDtW2DyvIHS96';
-const menuUrl = 'https://fdnzawlcf6.execute-api.eu-north-1.amazonaws.com/menu?type=wonton'
 let wontonItems = [];
 
-const TestKeyButton = document.querySelector('.cart-button')
-
-
-// TestKeyButton.addEventListener('click', ()  =>{
-// 	getWontonItems(menuUrl);
-// })
-
-async function getWontonItems(menuUrl){
+async function getMenuItems(Url){
 	try{
-		const response = await fetch(menuUrl, {
+		const response = await fetch(Url, {
 			method: 'GET',
 			headers:{
 					'x-zocom': APIkey,
@@ -32,4 +24,4 @@ async function getWontonItems(menuUrl){
 }
 
 
-export{ getWontonItems };
+export{ getMenuItems };

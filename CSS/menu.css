@@ -4,7 +4,7 @@
 	background-color: var(--mainGreen);
 	margin: auto;
 	padding: 1rem;
-	height: 100vh;
+	/* height: 100%; */
 }
 
 .cart-box{
@@ -19,8 +19,6 @@
 	border: none;
 	border-radius: 0.4rem;
 	background-color: var(--mainWhite);
-	right: 1rem;
-	top: 1rem
 }
 
 #menu-header{
@@ -29,29 +27,55 @@
 	text-shadow: 1px 1.5px 1px rgba(0, 0, 0, 0.911);
 }
 
-#menu-container{
+#menu-container, .drink-dips-container{
 	border-radius: 0.3rem;
-	overflow: hidden;
+	margin-bottom: 1rem;
+	background-color: var(--lightGray);
 }
 
 .menu-item{
-	background-color: var(--lightGray);
 	color: var(--mainWhite);
-	padding: 1rem;
+	padding: 0.8rem;
 }
 
-.menu-item-inner{
+.menu-item:not(:last-child){
+	border-bottom: dotted 1.5px rgba(255, 255, 255, 0.329);
+}
+
+.menu-item-inner, .drink-dip-inner{
 	display: flex;
 	gap: 0.3rem;
 }
 
-.menu-item-inner *{
-	font-size: 1.2rem;
+.menu-item-inner *, .drink-dip-inner *{
+	font-size: 1.5rem;
 	font-weight: bold;
 	margin-bottom: 0.4rem;
+	color: var(--mainWhite);
 }
 
 .dotted-divider{
 	border-bottom: dotted 2px var(--mainWhite);
 	flex-grow: 1;
+}
+
+.drink-dip{
+	color: var(--mainWhite);
+	background-color: var(--lightGray2);
+	padding: 0.5rem;
+	border-radius: 0.4rem;
+}
+
+.drink-dip-selections{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.85rem;
+}
+
+.drink-dip-inner{
+	margin-bottom: 1rem;
+}
+
+.drink-dips-container{
+	padding: 0.8rem;
 }
