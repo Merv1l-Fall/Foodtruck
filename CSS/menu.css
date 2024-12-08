@@ -36,6 +36,12 @@
 .menu-item{
 	color: var(--mainWhite);
 	padding: 0.8rem;
+	background: 0;
+	border: none;
+	text-align: left;
+	width: 100%;
+	padding-bottom: 1rem;
+	padding-top: 1rem;
 }
 
 .menu-item:not(:last-child){
@@ -54,12 +60,17 @@
 	color: var(--mainWhite);
 }
 
+.ingredients{
+	font-size: 14px;
+}
+
 .dotted-divider{
 	border-bottom: dotted 2px var(--mainWhite);
 	flex-grow: 1;
 }
 
 .submenu-item{
+	border: none;
 	color: var(--mainWhite);
 	background-color: var(--lightGray2);
 	padding: 0.5rem;
@@ -79,4 +90,10 @@
 
 .submenu-container{
 	padding: 0.8rem;
+	padding-bottom: 1rem;
+	padding-top: 1rem;
+}
+
+.selected{
+	background-color: var(--darkGray);
 }
