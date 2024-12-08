@@ -27,7 +27,7 @@
 	text-shadow: 1px 1.5px 1px rgba(0, 0, 0, 0.911);
 }
 
-#menu-container, .drink-dips-container{
+#menu-container, .submenu-container{
 	border-radius: 0.3rem;
 	margin-bottom: 1rem;
 	background-color: var(--lightGray);
@@ -42,12 +42,12 @@
 	border-bottom: dotted 1.5px rgba(255, 255, 255, 0.329);
 }
 
-.menu-item-inner, .drink-dip-inner{
+.menu-item-inner, .submenu-inner{
 	display: flex;
 	gap: 0.3rem;
 }
 
-.menu-item-inner *, .drink-dip-inner *{
+.menu-item-inner *, .submenu-inner *{
 	font-size: 1.5rem;
 	font-weight: bold;
 	margin-bottom: 0.4rem;
@@ -59,23 +59,24 @@
 	flex-grow: 1;
 }
 
-.drink-dip{
+.submenu-item{
 	color: var(--mainWhite);
 	background-color: var(--lightGray2);
 	padding: 0.5rem;
 	border-radius: 0.4rem;
+	font-size: 14px;
 }
 
-.drink-dip-selections{
+.submenu-selections{
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.85rem;
+	gap: 0.5rem;
 }
 
-.drink-dip-inner{
+.submenu-inner{
 	margin-bottom: 1rem;
 }
 
-.drink-dips-container{
+.submenu-container{
 	padding: 0.8rem;
 }
