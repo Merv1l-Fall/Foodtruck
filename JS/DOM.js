@@ -14,17 +14,13 @@ async function fetchMenuItems(type) {
 	if(type == wonton && items.length > 0){
 		createMenu(items);
 	}
-	else if(type == drink && items.length > 0){
-		createSubMenu(items)
-	}
-	else if(type == dip && items.length > 0){
+	else if((type == drink || type === dip) && items.length > 0){
 		createSubMenu(items)
 	}
 	else{
 		console.log('error getting menu items');
 	}
 }
-
 
 
 
@@ -74,28 +70,63 @@ function createSubMenu(items){
 		const subMenuSelections = document.querySelector(`.submenu-selections[data-type="${item.type}"]`)
 		subMenuSelections.appendChild(subMenuItem);
 	})
-
+	
 	//making sure prices are updated correctly
 	const dipItem = items.find(item => item.type === "dip")
 	const drinkItem = items.find(item => item.type === "drink")
-
+	
 	if(dipItem) {
 		const subMenuDipPrice = document.querySelector('.dip-price')
 		subMenuDipPrice.innerText = `${dipItem.price} SEK`
-
-	} else{
-		console.log("no dip prices found")
 	}
-
+	
+	
 	if(drinkItem){
 		const subMenuDrinkPrice = document.querySelector('.drink-price')
 		subMenuDrinkPrice.innerText = `${drinkItem.price} SEK`
-	} else{
-		console.log("no drink prices found")
 	}
-
+	
 }
 
-fetchMenuItems(wonton);
-fetchMenuItems(drink);
-fetchMenuItems(dip);
+// handle Buttons
+
+
+
+function handleButtons() {
+	const submenuButtons = document.querySelectorAll('.submenu-item');
+	const menuButtons = document.querySelectorAll('.menu-item');
+  
+	submenuButtons.forEach(button => {
+	  button.addEventListener('click', (event) => {
+		const targetButton = event.currentTarget;
+		if (targetButton.classList.contains('selected')) {
+		  targetButton.classList.remove('selected');
+		} else {
+		  console.log(targetButton.textContent);
+		  targetButton.classList.add('selected');
+		}
+	  });
+	});
+  
+	menuButtons.forEach(button => {
+	  button.addEventListener('click', (event) => {
+		const targetButton = event.currentTarget;
+		if (targetButton.classList.contains('selected')) {
+		  targetButton.classList.remove('selected');
+		} else {
+		  console.log(targetButton.type);
+		  targetButton.classList.add('selected');
+		}
+	  });
+	});
+  }
+
+async function loadMenu(){
+	await fetchMenuItems(wonton)
+	await fetchMenuItems(drink)
+	await fetchMenuItems(dip)
+
+	handleButtons();
+}
+
+loadMenu();
