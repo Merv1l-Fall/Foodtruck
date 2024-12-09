@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="./CSS/cart.css">
 
 	<!-- JS -->
-	 <script type="module" src="./JS/script.js"></script>
+	 <script type="module" src="./JS/DOM.js"></script>
 	 <script type="module" src="./JS/fetching.js"></script>
 
 	<!-- Fonts -->
@@ -26,14 +26,25 @@
 		</div>
 		<h2 id="menu-header">MENY</h2>
 		<div id="menu-container">
-			<div class="menu-item">
-			<div class="menu-item-inner">
-				<p>KARLSTAD</p>
-				<div class="dotted-divider"></div>
-				<p>9 SEK</p>
-			</div>
-			<p>Kantarell, Scharlottenlök, Morot, Bladpersilja</p>
 		</div>
+
+		<div class="submenu-container">
+			<div class="submenu-inner">
+				<p class="submenu-header">DIPSÅS</p>
+				<div class="dotted-divider"></div>
+				<p class="submenu-header dip-price"></p>
+			</div>
+			<div class="submenu-selections" data-type="dip">
+			</div>
+		</div>
+		<div class="submenu-container">
+			<div class="submenu-inner">
+				<p class="submenu-header">DRICKA</p>
+				<div class="dotted-divider"></div>
+				<p class="submenu-header drink-price"></p>
+			</div>
+			<div class="submenu-selections" data-type="drink">
+			</div>
 		</div>
 	</section>
 

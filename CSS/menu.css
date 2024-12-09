@@ -20,8 +20,6 @@
 	border: none;
 	border-radius: 0.4rem;
 	background-color: var(--mainWhite);
-	right: 1rem;
-	top: 1rem
 }
 
 #menu-header{
@@ -30,28 +28,74 @@
 	text-shadow: 1px 1.5px 1px rgba(0, 0, 0, 0.911);
 }
 
-#menu-container{
+#menu-container, .submenu-container{
 	border-radius: 0.3rem;
+	margin-bottom: 1rem;
+	background-color: var(--lightGray);
 	overflow: hidden;
 }
 
 .menu-item{
-	background-color: var(--lightGray);
 	color: var(--mainWhite);
-	padding: 1rem;
+	padding: 0.8rem;
+	background: 0;
+	border: none;
+	text-align: left;
+	width: 100%;
+	padding-bottom: 1rem;
+	padding-top: 1rem;
 }
 
-.menu-item-inner{
+.menu-item:not(:last-child){
+	border-bottom: dotted 1.5px rgba(255, 255, 255, 0.329);
+}
+
+.menu-item-inner, .submenu-inner{
 	display: flex;
+	gap: 0.3rem;
 }
 
-.menu-item-inner *{
-	font-size: 1.2rem;
+.menu-item-inner *, .submenu-inner *{
+	font-size: 1.5rem;
 	font-weight: bold;
 	margin-bottom: 0.4rem;
+	color: var(--mainWhite);
+}
+
+.ingredients{
+	font-size: 14px;
 }
 
 .dotted-divider{
 	border-bottom: dotted 2px var(--mainWhite);
 	flex-grow: 1;
+}
+
+.submenu-item{
+	border: none;
+	color: var(--mainWhite);
+	background-color: var(--lightGray2);
+	padding: 0.5rem;
+	border-radius: 0.4rem;
+	font-size: 14px;
+}
+
+.submenu-selections{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.submenu-inner{
+	margin-bottom: 1rem;
+}
+
+.submenu-container{
+	padding: 0.8rem;
+	padding-bottom: 1rem;
+	padding-top: 1rem;
+}
+
+.selected{
+	background-color: var(--darkGray);
 }
