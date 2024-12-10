@@ -5,13 +5,13 @@ export const cartManager = {
 		const existingItem = cart.find(item => item.name === name);
 
 		if(existingItem) {
-			existingItem += 1;
+			existingItem.quantity += 1;
 		} else {
 			cart.push({name, price, type, quantity: 1 })
 		}
 	},
 
-	removeItems(name){
+	removeItem(name){
 		const itemIndex = cart.findIndex(item => item.name === name);
 		if (itemIndex !== -1) {
 			const item = cart[itemIndex];

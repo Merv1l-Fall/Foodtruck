@@ -34,11 +34,13 @@ function createMenu(items){
 		items.forEach(item => {
 			const menuItem = document.createElement('button');
 			menuItem.classList.add('menu-item');
+			menuItem.setAttribute('data-price', item.price)
 			
 			const menuItemInner = document.createElement('div');
 			menuItemInner.classList.add('menu-item-inner');
 			
 			const nameElement = document.createElement('p');
+			nameElement.classList.add('item-name')
 			nameElement.innerText = item.name;
 			
 			const dottedDivider = document.createElement('div');
@@ -46,6 +48,7 @@ function createMenu(items){
 		
 			const priceElement = document.createElement('p');
 			priceElement.innerText = `${item.price} SEK`;
+			priceElement.classList.add('item-price')
 		
 			menuItemInner.appendChild(nameElement);
 			menuItemInner.appendChild(dottedDivider);
@@ -69,6 +72,7 @@ function createSubMenu(items){
 		const subMenuItem = document.createElement('button');
 		subMenuItem.classList.add('submenu-item');
 		subMenuItem.innerText = item.name;
+		subMenuItem.setAttribute('data-price', item.price)
 
 		const subMenuSelections = document.querySelector(`.submenu-selections[data-type="${item.type}"]`)
 		subMenuSelections.appendChild(subMenuItem);
@@ -91,10 +95,81 @@ function createSubMenu(items){
 	
 }
 
+//updating the cart
+function updateCart(){
+	const cartItems = cartManager.getCartItems();
+	const cartInnerContainer = document.querySelector("#cart-inner-container");
+	cartInnerContainer.innerHTML = '';
+
+	let totalPrice = 0;
+
+	cartItems.forEach(item => {
+		const cartItem = document.createElement('div');
+		cartItem.classList.add('cart-item');
+	
+		const cartItemInner = document.createElement('div');
+		cartItemInner.classList.add('cart-item-inner');
+	
+		const cartItemName = document.createElement('p');
+		cartItemName.innerText = item.name;
+	
+		const cartDivider = document.createElement('div');
+		cartDivider.classList.add('dotted-cart-divider');
+	
+		const cartItemPrice = document.createElement('p');
+		cartItemPrice.innerText = `${item.price} SEK`;
+	
+		cartItemInner.appendChild(cartItemName);
+		cartItemInner.appendChild(cartDivider);
+		cartItemInner.appendChild(cartItemPrice);
+	
+		const cartItemCounter = document.createElement('div');
+		cartItemCounter.classList.add('cart-item-counter');
+	
+		const addButton = document.createElement('button');
+		addButton.classList.add('add-button');
+		addButton.innerText = ' + ';
+	
+		const priceCounterElement = document.createElement('p');
+		priceCounterElement.classList.add('amount');
+		priceCounterElement.innerText = `${item.quantity} stycken`;
+	
+		const removeButton = document.createElement('button');
+		removeButton.classList.add('remove-button');
+		removeButton.innerText = ' - ';
+	
+		addButton.addEventListener('click', () => {
+		  cartManager.addItem(item.name, item.price, item.type);
+		  updateCart();
+		});
+	
+		removeButton.addEventListener('click', () => {
+		  cartManager.removeItem(item.name);
+		  updateCart();
+		});
+	
+		cartItemCounter.appendChild(removeButton);
+		cartItemCounter.appendChild(priceCounterElement);
+		cartItemCounter.appendChild(addButton);
+	
+		cartItem.appendChild(cartItemInner);
+		cartItem.appendChild(cartItemCounter);
+	
+		cartInnerContainer.appendChild(cartItem);
+
+		totalPrice += item.price * item.quantity;
+	  });
+
+	  const totalPriceElement = document.querySelector ('.total-price')
+
+	  totalPriceElement.innerText = `${totalPrice} SEK`;
+	
+
+}
+
+
+
 // handle Buttons
-
-
-
 function handleButtons() {
 	const submenuButtons = document.querySelectorAll('.submenu-item');
 	const menuButtons = document.querySelectorAll('.menu-item');
@@ -102,35 +177,30 @@ function handleButtons() {
 	submenuButtons.forEach(button => {
 	  button.addEventListener('click', (event) => {
 		const targetButton = event.currentTarget;
-		if (targetButton.classList.contains('selected')) {
-		  targetButton.classList.remove('selected');
-		} else {
-		  console.log(targetButton.textContent);
-		  targetButton.classList.add('selected');
-		}
+		const itemName = targetButton.textContent;
+		const itemType = targetButton.dataset.type;
+		const price = parseInt(targetButton.dataset.price, 10);
+
+		cartManager.addItem(itemName, price, itemType);
+
+		updateCart();
 	  });
 	});
   
 	menuButtons.forEach(button => {
 	  button.addEventListener('click', (event) => {
 		const targetButton = event.currentTarget;
-		if (targetButton.classList.contains('selected')) {
-		  targetButton.classList.remove('selected');
-		} else {
-		  console.log(targetButton);
-		  targetButton.classList.add('selected');
-		}
+		const itemName = targetButton.querySelector('.item-name').textContent;
+		const price = parseInt(targetButton.querySelector('.item-price').textContent.split('')[0], 10);
+
+		cartManager.addItem(itemName, price, "wonton")
+
+		updateCart();
 	  });
 	});
   }
 
-async function loadMenu(){
-	await fetchMenuItems(wonton)
-	await fetchMenuItems(drink)
-	await fetchMenuItems(dip)
 
-	handleButtons();
-}
 
 //Switching between different views
 const menuSection = document.querySelector('#menu');
@@ -152,5 +222,11 @@ cartButton.addEventListener('click', () => {
 })
 
 
+async function loadMenu(){
+	await fetchMenuItems(wonton)
+	await fetchMenuItems(drink)
+	await fetchMenuItems(dip)
 
+	handleButtons();
+}
 loadMenu();
