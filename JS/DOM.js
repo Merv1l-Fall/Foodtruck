@@ -1,4 +1,7 @@
 import { getMenuItems } from "./fetching.js";
+import { cartManager } from './cart.js';
+
+
 
 const menuContainer = document.querySelector('#menu-container')
 const wonton = 'wonton'
