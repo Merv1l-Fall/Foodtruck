@@ -31,6 +31,7 @@ function createMenu(items){
 		items.forEach(item => {
 			const menuItem = document.createElement('button');
 			menuItem.classList.add('menu-item');
+			menuItem.price = item.price
 			
 			const menuItemInner = document.createElement('div');
 			menuItemInner.classList.add('menu-item-inner');
@@ -66,6 +67,7 @@ function createSubMenu(items){
 		const subMenuItem = document.createElement('button');
 		subMenuItem.classList.add('submenu-item');
 		subMenuItem.innerText = item.name;
+		subMenuItem.price = item.price
 
 		const subMenuSelections = document.querySelector(`.submenu-selections[data-type="${item.type}"]`)
 		subMenuSelections.appendChild(subMenuItem);
@@ -88,7 +90,7 @@ function createSubMenu(items){
 	
 }
 
-// handle Buttons
+// handle Buttons in the menus
 
 
 
@@ -102,7 +104,7 @@ function handleButtons() {
 		if (targetButton.classList.contains('selected')) {
 		  targetButton.classList.remove('selected');
 		} else {
-		  console.log(targetButton.textContent);
+		  console.log(targetButton.price);
 		  targetButton.classList.add('selected');
 		}
 	  });
@@ -114,7 +116,7 @@ function handleButtons() {
 		if (targetButton.classList.contains('selected')) {
 		  targetButton.classList.remove('selected');
 		} else {
-		  console.log(targetButton);
+		  console.log(targetButton.price);
 		  targetButton.classList.add('selected');
 		}
 	  });
