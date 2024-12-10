@@ -1,5 +1,5 @@
 #cart{
-	display: flex;
+	display: none;
 	flex-direction: column;
 	background-color: var(--mainWhite);
 	padding: 1rem;
@@ -100,3 +100,12 @@
 	color: var(--mainWhite);
 	padding: 1.8rem;
 }
+
+.cart-return-button{
+	background: none;
+	border: 0;
+	padding: 0;
+	height: fit-content;
+	padding: 1rem;
+}
+

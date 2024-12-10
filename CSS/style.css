@@ -14,3 +14,11 @@
 	--mainWhite:#e9e8e5;
 	--mainRed:#EB5757;
 }
+
+#cart.display-flex, #menu.display-flex{
+	display: flex; 
+}
+
+.display-none{
+	display: none;
+}

@@ -114,7 +114,7 @@ function handleButtons() {
 		if (targetButton.classList.contains('selected')) {
 		  targetButton.classList.remove('selected');
 		} else {
-		  console.log(targetButton.type);
+		  console.log(targetButton);
 		  targetButton.classList.add('selected');
 		}
 	  });
@@ -128,5 +128,26 @@ async function loadMenu(){
 
 	handleButtons();
 }
+
+//Switching between different views
+const menuSection = document.querySelector('#menu');
+const cartSection = document.querySelector('#cart');
+
+const cartButton = document.querySelector('.cart-button');
+const cartReturnButton = document.querySelector('.cart-return-button');
+
+
+
+cartReturnButton.addEventListener('click', () => {
+ cartSection.classList.remove('display-flex')
+ menuSection.classList.add('display-flex')
+})
+cartButton.addEventListener('click', () => {
+	cartSection.classList.add('display-flex')
+	menuSection.classList.remove('display-flex')
+
+})
+
+
 
 loadMenu();

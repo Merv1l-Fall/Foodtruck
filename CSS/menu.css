@@ -1,11 +1,10 @@
 #menu{
-	display: flex;
+	display: none;
 	flex-direction: column;
 	background-color: var(--mainGreen);
 	margin: auto;
 	padding: 1rem;
-	height: 100vh;
-	display: none;
+	height: 100%;
 }
 
 .cart-box{
@@ -32,7 +31,7 @@
 	border-radius: 0.3rem;
 	margin-bottom: 1rem;
 	background-color: var(--lightGray);
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 
 .menu-item{
@@ -99,3 +98,4 @@
 .selected{
 	background-color: var(--darkGray);
 }
+
