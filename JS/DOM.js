@@ -1,7 +1,7 @@
-import { getMenuItems } from "./fetching.js";
+import { getMenuItems, placeOrder } from "./fetching.js";
 import { cartManager } from './cart.js';
 
-
+const payButton = document.querySelector('.pay-button')
 
 const menuContainer = document.querySelector('#menu-container')
 const wonton = 'wonton'
@@ -102,6 +102,7 @@ function updateCart(){
 	cartInnerContainer.innerHTML = '';
 
 	let totalPrice = 0;
+	let totalItems = 0;
 
 	cartItems.forEach(item => {
 		const cartItem = document.createElement('div');
@@ -158,11 +159,30 @@ function updateCart(){
 		cartInnerContainer.appendChild(cartItem);
 
 		totalPrice += item.price * item.quantity;
-	  });
+		totalItems += item.quantity;;
+
+	});
+	
 
 	  const totalPriceElement = document.querySelector ('.total-price')
-
 	  totalPriceElement.innerText = `${totalPrice} SEK`;
+
+	  const totalItemsElement = document.querySelector('.total-items')
+	  if(totalItems <= 0){
+		totalItemsElement.classList.add('display-none')
+
+		payButton.innerText = 'VARUKORGEN ÄR TOM!';
+		payButton.disabled = true;
+		payButton.classList.remove('active')
+	
+	  } else{
+		totalItemsElement.classList.remove('display-none')
+		totalItemsElement.innerText = totalItems;
+
+		payButton.innerText = 'TAKE MY MONEY!';
+		payButton.disabled = false;
+		payButton.classList.add('active')
+	  }
 	
 
 }
@@ -198,7 +218,12 @@ function handleButtons() {
 		updateCart();
 	  });
 	});
-  }
+}
+
+payButton.addEventListener('click', () => {
+	// const orderData = getOrderData();
+	placeOrder()
+});
 
 
 
@@ -230,3 +255,4 @@ async function loadMenu(){
 	handleButtons();
 }
 loadMenu();
+updateCart();

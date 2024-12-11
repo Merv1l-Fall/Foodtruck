@@ -19,6 +19,6 @@
 	display: flex; 
 }
 
-.display-none{
+.total-items.display-none{
 	display: none;
 }

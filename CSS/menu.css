@@ -19,6 +19,24 @@
 	border: none;
 	border-radius: 0.4rem;
 	background-color: var(--mainWhite);
+	position: relative;
+	cursor: pointer;
+}
+
+.total-items{
+	background-color: var(--mainRed);
+	color: var(--mainWhite);
+	font-size: 0.8rem;
+	border-radius: 100%;
+	width: 1.4rem;
+	height: 1.4rem;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	top: -0.4rem;
+	left: -0.4rem;
 }
 
 #menu-header{
@@ -31,7 +49,6 @@
 	border-radius: 0.3rem;
 	margin-bottom: 1rem;
 	background-color: var(--lightGray);
-	/* overflow: hidden; */
 }
 
 .menu-item{
@@ -43,6 +60,7 @@
 	width: 100%;
 	padding-bottom: 1rem;
 	padding-top: 1rem;
+	cursor: pointer;
 }
 
 .menu-item:not(:last-child){
@@ -77,6 +95,7 @@
 	padding: 0.5rem;
 	border-radius: 0.4rem;
 	font-size: 14px;
+	cursor: pointer;
 }
 
 .submenu-selections{
