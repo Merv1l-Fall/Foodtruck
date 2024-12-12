@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="./css/style.css">
 	<link rel="stylesheet" href="./css/menu.css">
 	<link rel="stylesheet" href="./css/cart.css">
+	<link rel="stylesheet" href="./css/eta.css">
 
 	<!-- JS -->
 	 <script type="module" src="./js/dom.js"></script>
@@ -57,7 +58,7 @@
 		</div>
 	</section>
 
-	<section id="cart">
+	<div id="cart">
 		<div class="icon-container">
 			<button class="cart-return-button">
 				<img src="svg/cart.svg" alt="icon for shopping cart" id="cart-icon">
@@ -79,10 +80,20 @@
 		</div>
 		<button class="pay-button" disabled>VARUKORGEN ÄR TOM!</button>
 	</div>
-	</section>
+</div>
 
-	<section>
+	<section id="eta">
+		<div class="eta-img-container">
+			<img src="./img/box-top.png" alt="picture of wonton box" class="wonton-box">
 
+		</div>
+		<h2 class="eta-header"> DINA WONTON TILLAGAS!</h2>
+		<p class="time-estimate">ETA 5 MIN</p>
+		<p class="order-id">#sdfsdf</p>
+		<div class="eta-button-container">
+			<button class="eta-buttons reciept">SE KVITTO</button>
+			<button class="eta-buttons new-order">GÖR EN NY BESTÄLLNING</button>
+		</div>
 	</section>
 </body>
 </html>

@@ -28,5 +28,9 @@ export const cartManager = {
 
 	getCartItems() {
 		return [...cart]
+	},
+
+	resetCart() {
+		cart.length = 0;
 	}
 }

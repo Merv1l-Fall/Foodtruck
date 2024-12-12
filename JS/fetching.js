@@ -35,7 +35,6 @@ async function placeOrder(cartManager){
         items: cartManager.getCartItems().flatMap(item => 
             Array(item.quantity).fill(Number(item.id))
         )
-		// items: [1, 1]
     };
 	console.log("placing order", orderData)
 	try{
