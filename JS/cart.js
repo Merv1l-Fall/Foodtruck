@@ -57,7 +57,7 @@ export function updateCart(){
 		cartDivider.classList.add('dotted-cart-divider');
 	
 		const cartItemPrice = document.createElement('p');
-		cartItemPrice.innerText = `${item.price} SEK`;
+		cartItemPrice.innerText = `${item.price * item.quantity} SEK`;
 	
 		cartItemInner.appendChild(cartItemName);
 		cartItemInner.appendChild(cartDivider);

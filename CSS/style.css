@@ -19,7 +19,7 @@ body{
 	--mainRed:#EB5757;
 }
 
-#cart.display-flex, #menu.display-flex, #eta.display-flex{
+#cart.display-flex, #menu.display-flex, #eta.display-flex, #receipt.display-flex{
 	display: flex; 
 }
 
