@@ -1,4 +1,7 @@
-import { getMenuItems } from "./fetching.js";
+import { getMenuItems, placeOrder } from "./fetching.js";
+import { cartManager } from './cart.js';
+
+const payButton = document.querySelector('.pay-button')
 
 const menuContainer = document.querySelector('#menu-container')
 const wonton = 'wonton'
@@ -31,12 +34,14 @@ function createMenu(items){
 		items.forEach(item => {
 			const menuItem = document.createElement('button');
 			menuItem.classList.add('menu-item');
-			menuItem.price = item.price
+			menuItem.setAttribute('data-price', item.price)
+			menuItem.setAttribute('data-id', item.id)
 			
 			const menuItemInner = document.createElement('div');
 			menuItemInner.classList.add('menu-item-inner');
 			
 			const nameElement = document.createElement('p');
+			nameElement.classList.add('item-name')
 			nameElement.innerText = item.name;
 			
 			const dottedDivider = document.createElement('div');
@@ -44,6 +49,7 @@ function createMenu(items){
 		
 			const priceElement = document.createElement('p');
 			priceElement.innerText = `${item.price} SEK`;
+			priceElement.classList.add('item-price')
 		
 			menuItemInner.appendChild(nameElement);
 			menuItemInner.appendChild(dottedDivider);
@@ -67,7 +73,8 @@ function createSubMenu(items){
 		const subMenuItem = document.createElement('button');
 		subMenuItem.classList.add('submenu-item');
 		subMenuItem.innerText = item.name;
-		subMenuItem.price = item.price
+		subMenuItem.setAttribute('data-price', item.price)
+		subMenuItem.setAttribute('data-id', item.id)
 
 		const subMenuSelections = document.querySelector(`.submenu-selections[data-type="${item.type}"]`)
 		subMenuSelections.appendChild(subMenuItem);
@@ -90,10 +97,101 @@ function createSubMenu(items){
 	
 }
 
-// handle Buttons in the menus
+//updating the cart
+function updateCart(){
+	const cartItems = cartManager.getCartItems();
+	const cartInnerContainer = document.querySelector("#cart-inner-container");
+	cartInnerContainer.innerHTML = '';
+
+	let totalPrice = 0;
+	let totalItems = 0;
+
+	cartItems.forEach(item => {
+		const cartItem = document.createElement('div');
+		cartItem.classList.add('cart-item');
+	
+		const cartItemInner = document.createElement('div');
+		cartItemInner.classList.add('cart-item-inner');
+	
+		const cartItemName = document.createElement('p');
+		cartItemName.innerText = item.name;
+	
+		const cartDivider = document.createElement('div');
+		cartDivider.classList.add('dotted-cart-divider');
+	
+		const cartItemPrice = document.createElement('p');
+		cartItemPrice.innerText = `${item.price} SEK`;
+	
+		cartItemInner.appendChild(cartItemName);
+		cartItemInner.appendChild(cartDivider);
+		cartItemInner.appendChild(cartItemPrice);
+	
+		const cartItemCounter = document.createElement('div');
+		cartItemCounter.classList.add('cart-item-counter');
+	
+		const addButton = document.createElement('button');
+		addButton.classList.add('add-button');
+		addButton.innerText = ' + ';
+	
+		const priceCounterElement = document.createElement('p');
+		priceCounterElement.classList.add('amount');
+		priceCounterElement.innerText = `${item.quantity} stycken`;
+	
+		const removeButton = document.createElement('button');
+		removeButton.classList.add('remove-button');
+		removeButton.innerText = ' - ';
+	
+		addButton.addEventListener('click', () => {
+		  cartManager.addItem(item.name, item.price, item.type);
+		  updateCart();
+		});
+	
+		removeButton.addEventListener('click', () => {
+		  cartManager.removeItem(item.name);
+		  updateCart();
+		});
+	
+		cartItemCounter.appendChild(removeButton);
+		cartItemCounter.appendChild(priceCounterElement);
+		cartItemCounter.appendChild(addButton);
+	
+		cartItem.appendChild(cartItemInner);
+		cartItem.appendChild(cartItemCounter);
+	
+		cartInnerContainer.appendChild(cartItem);
+
+		totalPrice += item.price * item.quantity;
+		totalItems += item.quantity;;
+
+	});
+	
+
+	  const totalPriceElement = document.querySelector ('.total-price')
+	  totalPriceElement.innerText = `${totalPrice} SEK`;
+
+	  const totalItemsElement = document.querySelector('.total-items')
+	  if(totalItems <= 0){
+		totalItemsElement.classList.add('display-none')
+
+		payButton.innerText = 'VARUKORGEN ÄR TOM!';
+		payButton.disabled = true;
+		payButton.classList.remove('active')
+	
+	  } else{
+		totalItemsElement.classList.remove('display-none')
+		totalItemsElement.innerText = totalItems;
+
+		payButton.innerText = 'TAKE MY MONEY!';
+		payButton.disabled = false;
+		payButton.classList.add('active')
+	  }
+	
+
+}
 
 
 
+// handle Buttons
 function handleButtons() {
 	const submenuButtons = document.querySelectorAll('.submenu-item');
 	const menuButtons = document.querySelectorAll('.menu-item');
@@ -101,35 +199,37 @@ function handleButtons() {
 	submenuButtons.forEach(button => {
 	  button.addEventListener('click', (event) => {
 		const targetButton = event.currentTarget;
-		if (targetButton.classList.contains('selected')) {
-		  targetButton.classList.remove('selected');
-		} else {
-		  console.log(targetButton.price);
-		  targetButton.classList.add('selected');
-		}
+		const itemName = targetButton.textContent;
+		const itemType = targetButton.dataset.type;
+		const price = parseInt(targetButton.dataset.price, 10);
+		const itemId = targetButton.dataset.id;
+
+		cartManager.addItem(itemName, price, itemType, itemId);
+
+		updateCart();
 	  });
 	});
   
 	menuButtons.forEach(button => {
 	  button.addEventListener('click', (event) => {
 		const targetButton = event.currentTarget;
-		if (targetButton.classList.contains('selected')) {
-		  targetButton.classList.remove('selected');
-		} else {
-		  console.log(targetButton.price);
-		  targetButton.classList.add('selected');
-		}
+		const itemName = targetButton.querySelector('.item-name').textContent;
+		const price = parseInt(targetButton.querySelector('.item-price').textContent.split('')[0], 10);
+		const itemId = targetButton.dataset.id;
+
+		cartManager.addItem(itemName, price, "wonton", itemId)
+
+		updateCart();
 	  });
 	});
-  }
-
-async function loadMenu(){
-	await fetchMenuItems(wonton)
-	await fetchMenuItems(drink)
-	await fetchMenuItems(dip)
-
-	handleButtons();
 }
+
+payButton.addEventListener('click', () => {
+	// const orderData = getOrderData();
+	placeOrder(cartManager)
+});
+
+
 
 //Switching between different views
 const menuSection = document.querySelector('#menu');
@@ -151,5 +251,12 @@ cartButton.addEventListener('click', () => {
 })
 
 
+async function loadMenu(){
+	await fetchMenuItems(wonton)
+	await fetchMenuItems(drink)
+	await fetchMenuItems(dip)
 
+	handleButtons();
+}
 loadMenu();
+updateCart();

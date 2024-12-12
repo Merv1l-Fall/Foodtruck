@@ -46,7 +46,7 @@
 	margin-top: 0.5rem;
 }
 
-.price{
+.amount{
 	font-size: 1.2rem;
 	font-weight: normal;
 }
@@ -62,6 +62,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	cursor: pointer;
 }
 
 .cart-bottom-container{
@@ -73,7 +74,7 @@
 }
 
 .price-info{
-	background-color: #a7a7a7;
+	background-color: var(--lightGray2);
 	display: flex;
 	justify-content: space-between;
 	border-radius: 0.5rem;
@@ -101,11 +102,18 @@
 	padding: 1.8rem;
 }
 
+.active{
+	cursor: pointer;
+}
+
 .cart-return-button{
 	background: none;
 	border: 0;
 	padding: 0;
-	height: fit-content;
-	padding: 1rem;
+	height: 4rem;
+	width: 4rem;
+	border: 2px solid var(--darkGray);
+	border-radius: 0.5rem;
+	cursor: pointer;
 }
 

@@ -5,14 +5,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>YUM YUM GIM MI SUM</title>
 
+	<link
+      rel="shortcut icon"
+      href="https://img.icons8.com/?size=100&id=OtQ3nMjnl7GI&format=png&color=000000"
+      type="image/x-icon"
+    />
+
 	<!-- CSS -->
-	<link rel="stylesheet" href="./CSS/style.css">
-	<link rel="stylesheet" href="./CSS/menu.css">
-	<link rel="stylesheet" href="./CSS/cart.css">
+	<link rel="stylesheet" href="./css/style.css">
+	<link rel="stylesheet" href="./css/menu.css">
+	<link rel="stylesheet" href="./css/cart.css">
 
 	<!-- JS -->
-	 <script type="module" src="./JS/DOM.js"></script>
-	 <script type="module" src="./JS/fetching.js"></script>
+	 <script type="module" src="./js/dom.js"></script>
+	 <script type="module" src="./js/fetching.js"></script>
 
 	<!-- Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +28,10 @@
 <body>
 	<section id="menu" class="display-flex">
 		<div class="cart-box">
-			<button class="cart-button"> <img src="svg\cart.svg" alt="shopping cart"> </button>
+			<button class="cart-button">
+				<p class="total-items"></p>
+				<img src="svg\cart.svg" alt="shopping cart">
+			</button>
 		</div>
 		<h2 id="menu-header">MENY</h2>
 		<div id="menu-container">
@@ -56,25 +65,7 @@
 			</div>
 
 	<div id="cart-inner-container">
-		<div class="cart-item">
-			<div class="cart-item-inner">
-				<p>KARLSTAD</p>
-				<div class="dotted-cart-divider"></div>
-				<p>9 SEK</p>
-			</div>
-			<div class="cart-item-counter">
-				<button class="add-button"> + </button>
-				<p class="price">3 stycken</p>
-				<button class="remove-button"> - </button>
-			</div>
-		</div>
-		<div class="cart-item">
-			<div class="cart-item-inner">
-				<p>KARLSTAD</p>
-				<div class="dotted-cart-divider"></div>
-				<p>9 SEK</p>
-			</div>
-		</div>
+		
 
 	</div>
 
@@ -84,10 +75,14 @@
 				<p class="total-text">TOTALT</p>
 				<p>inkl 20% moms</p>
 			</div>
-			<p class="total-price">120 SEK</p>
+			<p class="total-price"></p>
 		</div>
-		<button class="pay-button"> TAKE MY MONEY! </button>
+		<button class="pay-button" disabled>VARUKORGEN ÄR TOM!</button>
 	</div>
+	</section>
+
+	<section>
+
 	</section>
 </body>
 </html>
