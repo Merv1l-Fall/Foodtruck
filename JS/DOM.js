@@ -1,7 +1,7 @@
 import { getMenuItems, placeOrder } from "./fetching.js";
 import { cartManager } from './cart.js';
 
-const payButton = document.querySelector('.pay-button')
+
 
 const menuContainer = document.querySelector('#menu-container')
 const wonton = 'wonton'
@@ -187,7 +187,7 @@ function updateCart(){
 	  }
 }
 
-//makes an order and updates eta screen
+//makes an order and calls to update eta
 async function handleOrder() {
 	try {
 		const data = await placeOrder(cartManager);
@@ -198,6 +198,7 @@ async function handleOrder() {
 	}
 }
 
+//updates eta screen
 function updateEta(data){
 	const etaElement = document.querySelector('.time-estimate')
 	const orderIdElement = document.querySelector('.order-id')
@@ -217,8 +218,16 @@ function updateEta(data){
 }
 
 
+//reset the page to make a new order
+function resetOrder(){
+	cartManager.resetCart();
+	updateCart();
+	hideEta();
+	showMenu();
+}
 
-// handle Buttons
+
+//Buttons
 function handleButtons() {
 	const submenuButtons = document.querySelectorAll('.submenu-item');
 	const menuButtons = document.querySelectorAll('.menu-item');
@@ -251,10 +260,19 @@ function handleButtons() {
 	});
 }
 
+const payButton = document.querySelector('.pay-button')
+const newOrderButton = document.querySelector('.new-order')
+
 payButton.addEventListener('click', () => {
-	placeOrder(cartManager);
 	handleOrder();
 });
+
+newOrderButton.addEventListener('click', () => {
+	resetOrder();
+})
+
+
+
 
 
 
@@ -272,7 +290,11 @@ function showEta(){
 }
 
 function hideEta(){
-	cartSection.classList.remove('display-flex')
+	etaSection.classList.remove('display-flex')
+}
+
+function showMenu(){
+	menuSection.classList.add('display-flex')
 }
 
 cartReturnButton.addEventListener('click', () => {
