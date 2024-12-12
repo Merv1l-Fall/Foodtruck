@@ -1,5 +1,6 @@
 import { getMenuItems, placeOrder } from "./fetching.js";
 import { cartManager, updateCart } from './cart.js';
+import { handleReceipt } from "./receipt.js";
 
 
 
@@ -97,8 +98,6 @@ function createSubMenu(items){
 	
 }
 
-//updating the cart
-
 
 //makes an order and calls to update eta
 async function handleOrder() {
@@ -175,6 +174,7 @@ function handleButtons() {
 
 const payButton = document.querySelector('.pay-button')
 const newOrderButton = document.querySelector('.new-order')
+const receiptButton = document.querySelector('receipt')
 
 payButton.addEventListener('click', () => {
 	handleOrder();
@@ -184,10 +184,17 @@ newOrderButton.addEventListener('click', () => {
 	resetOrder();
 })
 
+receiptButton.addEventListener('click', () => {
+	handleReceipt();
+	showReciept();
+	hideEta
+})
+
 //Switching between different views
 const menuSection = document.querySelector('#menu');
 const cartSection = document.querySelector('#cart');
 const etaSection = document.querySelector('#eta')
+const receiptSection = document.querySelector('#receipt-section')
 
 const cartButton = document.querySelector('.cart-button');
 const cartReturnButton = document.querySelector('.cart-return-button');
@@ -203,6 +210,14 @@ function hideEta(){
 
 function showMenu(){
 	menuSection.classList.add('display-flex')
+}
+
+function showReciept(){
+	receiptSection.classList.add('display-flex')
+}
+
+function hideReciept(){
+	receiptSection.classList.remove('display-flex')
 }
 
 cartReturnButton.addEventListener('click', () => {

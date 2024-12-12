@@ -58,7 +58,7 @@ async function placeOrder(cartManager){
 		
 		const data = await response.json();
 		console.log('Order placed sucsessfully', data);
-		return data;
+		return {data, orderId: data.order.id};
 	}
 
 	catch(error){
@@ -67,7 +67,29 @@ async function placeOrder(cartManager){
 	}
 };
 
+async function getReceipt(orderId) {
+	try{
+		const options = {
+			method: 'GET',
+			headers: {
+				"Content-Type": 'application/json',
+				"x-zocom": APIkey,
+			}
+		}
+
+		const response = await fetch(`${apiUrl}${tenant}/receipts/${orderId}`, options)
+
+		if(!response.ok) {
+			throw new Error(`HTTP Error ${response.status}`)
+		}
+		const data = await response.json();
+		return data
+		
+	}
+	catch(error){
+		console.error('Error geting receipt', error.message);
+	}
+}
 
 
-
-export{ getMenuItems, placeOrder };
+export{ getMenuItems, placeOrder, getReceipt };
