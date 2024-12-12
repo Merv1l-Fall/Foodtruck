@@ -39,14 +39,14 @@
 .eta-buttons{
 	background-color: var(--darkGray);
 	border: none;
-	border-radius: 0.5rem;
+	border-radius: 0.3rem;
 	font-size: 1.5rem;
 	font-weight: bold;
 	color: var(--mainWhite);
 	padding: 1.5rem;
 }
 
-.eta-buttons.reciept{
+.eta-buttons.receipt{
 	background-color: var(--lightGray);
 	border: 2px solid var(--mainWhite);
 	color: var(--mainWhite);
