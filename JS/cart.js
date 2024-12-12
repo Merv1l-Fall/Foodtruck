@@ -1,13 +1,13 @@
 const cart = [];
 
 export const cartManager = {
-	addItem(name, price, type) {
+	addItem(name, price, type, id) {
 		const existingItem = cart.find(item => item.name === name);
 
 		if(existingItem) {
 			existingItem.quantity += 1;
 		} else {
-			cart.push({name, price, type, quantity: 1 })
+			cart.push({id, name, price, type, quantity: 1 })
 		}
 	},
 

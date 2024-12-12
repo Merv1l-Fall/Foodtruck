@@ -1,3 +1,5 @@
+import { cartManager } from "./cart.js";
+
 const APIkey = 'yum-JAaNDtW2DyvIHS96';
 const tenant = 'epjp'
 let wontonItems = [];
@@ -26,12 +28,15 @@ async function getMenuItems(Url){
 	}
 }
 
-const orderData = {
-    items: [1]
-};
 
 
-async function placeOrder(){
+async function placeOrder(cartManager){
+	const orderData = {
+        items: cartManager.getCartItems().flatMap(item => 
+            Array(item.quantity).fill(Number(item.id))
+        )
+		// items: [1, 1]
+    };
 	console.log("placing order", orderData)
 	try{
 		const options = {
@@ -39,11 +44,13 @@ async function placeOrder(){
 			headers: {
 				"Content-Type": 'application/json',
 				"x-zocom": APIkey,
-				"tenant": tenant
 			},
 			body: JSON.stringify(orderData)
 		}
+
+		console.log("Order data before sending:", JSON.stringify(orderData));
 		const response = await fetch(`${apiUrl}${tenant}/orders`, options);
+
 		if (!response.ok) {
 			const errorResponse = await response.text();
 			console.error('Error response', errorResponse);
@@ -51,7 +58,7 @@ async function placeOrder(){
 		  }
 		
 		const data = await response.json();
-		console.log('Order placed sucsessfully', data.status);
+		console.log('Order placed sucsessfully', data);
 		return data;
 	}
 

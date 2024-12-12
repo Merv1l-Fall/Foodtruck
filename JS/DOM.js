@@ -35,6 +35,7 @@ function createMenu(items){
 			const menuItem = document.createElement('button');
 			menuItem.classList.add('menu-item');
 			menuItem.setAttribute('data-price', item.price)
+			menuItem.setAttribute('data-id', item.id)
 			
 			const menuItemInner = document.createElement('div');
 			menuItemInner.classList.add('menu-item-inner');
@@ -73,6 +74,7 @@ function createSubMenu(items){
 		subMenuItem.classList.add('submenu-item');
 		subMenuItem.innerText = item.name;
 		subMenuItem.setAttribute('data-price', item.price)
+		subMenuItem.setAttribute('data-id', item.id)
 
 		const subMenuSelections = document.querySelector(`.submenu-selections[data-type="${item.type}"]`)
 		subMenuSelections.appendChild(subMenuItem);
@@ -200,8 +202,9 @@ function handleButtons() {
 		const itemName = targetButton.textContent;
 		const itemType = targetButton.dataset.type;
 		const price = parseInt(targetButton.dataset.price, 10);
+		const itemId = targetButton.dataset.id;
 
-		cartManager.addItem(itemName, price, itemType);
+		cartManager.addItem(itemName, price, itemType, itemId);
 
 		updateCart();
 	  });
@@ -212,8 +215,9 @@ function handleButtons() {
 		const targetButton = event.currentTarget;
 		const itemName = targetButton.querySelector('.item-name').textContent;
 		const price = parseInt(targetButton.querySelector('.item-price').textContent.split('')[0], 10);
+		const itemId = targetButton.dataset.id;
 
-		cartManager.addItem(itemName, price, "wonton")
+		cartManager.addItem(itemName, price, "wonton", itemId)
 
 		updateCart();
 	  });
@@ -222,7 +226,7 @@ function handleButtons() {
 
 payButton.addEventListener('click', () => {
 	// const orderData = getOrderData();
-	placeOrder()
+	placeOrder(cartManager)
 });
 
 
