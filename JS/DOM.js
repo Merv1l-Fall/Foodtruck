@@ -185,7 +185,34 @@ function updateCart(){
 		payButton.disabled = false;
 		payButton.classList.add('active')
 	  }
-	
+}
+
+//makes an order and updates eta screen
+async function handleOrder() {
+	try {
+		const data = await placeOrder(cartManager);
+		updateEta(data)
+		showEta();
+	}	catch(error){
+		console.error('failed to place the order:', error);
+	}
+}
+
+function updateEta(data){
+	const etaElement = document.querySelector('.time-estimate')
+	const orderIdElement = document.querySelector('.order-id')
+
+	const orderEta = new Date(data.order.eta); 
+    const currentTime = new Date(); 
+
+    const timeDifference = Math.max(0, orderEta - currentTime); // 
+    const minutesLeft = Math.ceil(timeDifference / (1000 * 60));
+
+
+	const orderId = data.order.id
+
+	orderIdElement.innerText =`#${orderId}`;
+	etaElement.innerText = `ETA: ${minutesLeft} MIN`;
 
 }
 
@@ -225,8 +252,8 @@ function handleButtons() {
 }
 
 payButton.addEventListener('click', () => {
-	// const orderData = getOrderData();
-	placeOrder(cartManager)
+	placeOrder(cartManager);
+	handleOrder();
 });
 
 
@@ -234,11 +261,19 @@ payButton.addEventListener('click', () => {
 //Switching between different views
 const menuSection = document.querySelector('#menu');
 const cartSection = document.querySelector('#cart');
+const etaSection = document.querySelector('#eta')
 
 const cartButton = document.querySelector('.cart-button');
 const cartReturnButton = document.querySelector('.cart-return-button');
 
+function showEta(){
+	cartSection.classList.remove('display-flex')
+	etaSection.classList.add('display-flex')
+}
 
+function hideEta(){
+	cartSection.classList.remove('display-flex')
+}
 
 cartReturnButton.addEventListener('click', () => {
  cartSection.classList.remove('display-flex')
