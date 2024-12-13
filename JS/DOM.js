@@ -8,6 +8,7 @@ const menuContainer = document.querySelector('#menu-container')
 const wonton = 'wonton'
 const drink = 'drink'
 const dip = 'dip'
+let lastOrderData = null;
 
 //getting the menu items and calling the correct function
 async function fetchMenuItems(type) {
@@ -103,6 +104,7 @@ function createSubMenu(items){
 async function handleOrder() {
 	try {
 		const data = await placeOrder(cartManager);
+		lastOrderData = data;
 		updateEta(data)
 		showEta();
 	}	catch(error){
@@ -185,7 +187,7 @@ newOrderButton.addEventListener('click', () => {
 })
 
 receiptButton.addEventListener('click', () => {
-	handleReceipt();
+	handleReceipt(lastOrderData);
 	showReciept();
 	hideEta
 })

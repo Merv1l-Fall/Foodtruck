@@ -1,13 +1,20 @@
 import { getReceipt } from "/js/fetching.js";
 
 export async function handleReceipt(data) {
-	console.log(data)
+	console.log('handling data for receipt', data)
+
+	if (!data || !data.order || !data.order.id) {
+        console.error("Invalid order data. Cannot fetch receipt.");
+        return;
+    }
+	
     try {
-        const receipt = await getReceipt(data);
+        const receiptArray = await getReceipt(data);
+		console.log("Receipt data:", receiptArray);
         
-        if (receipt && receipt.items) {
-            receipt.items.forEach(item => {
-                console.log(`Item: ${item.name}, Quantity: ${item.quantity}`);
+        if (receiptArray && receiptArray.receipt.items) {
+            receiptArray.receipt.items.forEach(item => {
+                console.log(`Item: ${item.name}, Quantity: ${item.quantity}, price ${item.price}`);
             });
         } else {
             console.error("No items found in the receipt.");

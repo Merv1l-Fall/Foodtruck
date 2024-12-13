@@ -68,8 +68,12 @@ async function placeOrder(cartManager){
 };
 
 async function getReceipt(data) {
+	if (!data || !data.order || !data.order.id) {
+        throw new Error("Invalid data provided. Missing order ID.");
+    }
+
 	const orderId = data.order.id;
-	console.log('orderId:', orderId)
+	console.log('fetching receipt for orderId:', orderId)
 	try{
 		const options = {
 			method: 'GET',
