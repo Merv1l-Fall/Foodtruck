@@ -67,7 +67,35 @@ async function placeOrder(cartManager){
 	}
 };
 
+async function getReceipt(data) {
+	if (!data || !data.order || !data.order.id) {
+        throw new Error("Invalid data provided. Missing order ID.");
+    }
+
+	const orderId = data.order.id;
+	console.log('fetching receipt for orderId:', orderId)
+	try{
+		const options = {
+			method: 'GET',
+			headers: {
+				"Content-Type": 'application/json',
+				"x-zocom": APIkey,
+			}
+		}
+
+		const response = await fetch(`${apiUrl}/receipts/${orderId}`, options)
+
+		if(!response.ok) {
+			throw new Error(`HTTP Error ${response.status}`)
+		}
+		const receiptData = await response.json();
+		return receiptData
+		
+	}
+	catch(error){
+		console.error('Error geting receipt', error.message);
+	}
+}
 
 
-
-export{ getMenuItems, placeOrder };
+export{ getMenuItems, placeOrder, getReceipt };

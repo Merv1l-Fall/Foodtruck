@@ -1,5 +1,6 @@
 import { getMenuItems, placeOrder } from "./fetching.js";
-import { cartManager } from './cart.js';
+import { cartManager, updateCart } from './cart.js';
+import { handleReceipt } from "/js/receipt.js";
 
 
 
@@ -7,6 +8,7 @@ const menuContainer = document.querySelector('#menu-container')
 const wonton = 'wonton'
 const drink = 'drink'
 const dip = 'dip'
+let lastOrderData = null;
 
 //getting the menu items and calling the correct function
 async function fetchMenuItems(type) {
@@ -97,100 +99,12 @@ function createSubMenu(items){
 	
 }
 
-//updating the cart
-function updateCart(){
-	const cartItems = cartManager.getCartItems();
-	const cartInnerContainer = document.querySelector("#cart-inner-container");
-	cartInnerContainer.innerHTML = '';
-
-	let totalPrice = 0;
-	let totalItems = 0;
-
-	cartItems.forEach(item => {
-		const cartItem = document.createElement('div');
-		cartItem.classList.add('cart-item');
-	
-		const cartItemInner = document.createElement('div');
-		cartItemInner.classList.add('cart-item-inner');
-	
-		const cartItemName = document.createElement('p');
-		cartItemName.innerText = item.name;
-	
-		const cartDivider = document.createElement('div');
-		cartDivider.classList.add('dotted-cart-divider');
-	
-		const cartItemPrice = document.createElement('p');
-		cartItemPrice.innerText = `${item.price} SEK`;
-	
-		cartItemInner.appendChild(cartItemName);
-		cartItemInner.appendChild(cartDivider);
-		cartItemInner.appendChild(cartItemPrice);
-	
-		const cartItemCounter = document.createElement('div');
-		cartItemCounter.classList.add('cart-item-counter');
-	
-		const addButton = document.createElement('button');
-		addButton.classList.add('add-button');
-		addButton.innerText = ' + ';
-	
-		const priceCounterElement = document.createElement('p');
-		priceCounterElement.classList.add('amount');
-		priceCounterElement.innerText = `${item.quantity} stycken`;
-	
-		const removeButton = document.createElement('button');
-		removeButton.classList.add('remove-button');
-		removeButton.innerText = ' - ';
-	
-		addButton.addEventListener('click', () => {
-		  cartManager.addItem(item.name, item.price, item.type);
-		  updateCart();
-		});
-	
-		removeButton.addEventListener('click', () => {
-		  cartManager.removeItem(item.name);
-		  updateCart();
-		});
-	
-		cartItemCounter.appendChild(removeButton);
-		cartItemCounter.appendChild(priceCounterElement);
-		cartItemCounter.appendChild(addButton);
-	
-		cartItem.appendChild(cartItemInner);
-		cartItem.appendChild(cartItemCounter);
-	
-		cartInnerContainer.appendChild(cartItem);
-
-		totalPrice += item.price * item.quantity;
-		totalItems += item.quantity;;
-
-	});
-	
-
-	  const totalPriceElement = document.querySelector ('.total-price')
-	  totalPriceElement.innerText = `${totalPrice} SEK`;
-
-	  const totalItemsElement = document.querySelector('.total-items')
-	  if(totalItems <= 0){
-		totalItemsElement.classList.add('display-none')
-
-		payButton.innerText = 'VARUKORGEN ÄR TOM!';
-		payButton.disabled = true;
-		payButton.classList.remove('active')
-	
-	  } else{
-		totalItemsElement.classList.remove('display-none')
-		totalItemsElement.innerText = totalItems;
-
-		payButton.innerText = 'TAKE MY MONEY!';
-		payButton.disabled = false;
-		payButton.classList.add('active')
-	  }
-}
 
 //makes an order and calls to update eta
 async function handleOrder() {
 	try {
 		const data = await placeOrder(cartManager);
+		lastOrderData = data;
 		updateEta(data)
 		showEta();
 	}	catch(error){
@@ -214,6 +128,7 @@ function updateEta(data){
 
 	orderIdElement.innerText =`#${orderId}`;
 	etaElement.innerText = `ETA: ${minutesLeft} MIN`;
+	handleReceipt(lastOrderData);
 
 }
 
@@ -224,6 +139,7 @@ function resetOrder(){
 	updateCart();
 	hideEta();
 	showMenu();
+	hideReciept();
 }
 
 
@@ -262,6 +178,8 @@ function handleButtons() {
 
 const payButton = document.querySelector('.pay-button')
 const newOrderButton = document.querySelector('.new-order')
+const receiptButton = document.querySelector('.receipt')
+const receiptResetBUtton = document.querySelector('.receipt-new-order')
 
 payButton.addEventListener('click', () => {
 	handleOrder();
@@ -269,17 +187,22 @@ payButton.addEventListener('click', () => {
 
 newOrderButton.addEventListener('click', () => {
 	resetOrder();
+});
+
+receiptButton.addEventListener('click', () => {
+	showReciept();
+	hideEta();
+});
+
+receiptResetBUtton.addEventListener('click', () => {
+	resetOrder()
 })
-
-
-
-
-
 
 //Switching between different views
 const menuSection = document.querySelector('#menu');
 const cartSection = document.querySelector('#cart');
 const etaSection = document.querySelector('#eta')
+const receiptSection = document.querySelector('#receipt-section')
 
 const cartButton = document.querySelector('.cart-button');
 const cartReturnButton = document.querySelector('.cart-return-button');
@@ -295,6 +218,14 @@ function hideEta(){
 
 function showMenu(){
 	menuSection.classList.add('display-flex')
+}
+
+function showReciept(){
+	receiptSection.classList.add('display-flex')
+}
+
+function hideReciept(){
+	receiptSection.classList.remove('display-flex')
 }
 
 cartReturnButton.addEventListener('click', () => {

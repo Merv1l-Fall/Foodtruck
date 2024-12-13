@@ -16,7 +16,8 @@
 	<link rel="stylesheet" href="./css/menu.css">
 	<link rel="stylesheet" href="./css/cart.css">
 	<link rel="stylesheet" href="./css/eta.css">
-
+	<link rel="stylesheet" href="./css/receipt.css">
+	
 	<!-- JS -->
 	 <script type="module" src="./js/dom.js"></script>
 	 <script type="module" src="./js/fetching.js"></script>
@@ -27,6 +28,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
+	
 	<section id="menu" class="display-flex">
 		<div class="cart-box">
 			<button class="cart-button">
@@ -82,18 +84,37 @@
 	</div>
 </div>
 
-	<section id="eta">
-		<div class="eta-img-container">
-			<img src="./img/box-top.png" alt="picture of wonton box" class="wonton-box">
+<section id="eta">
+	<div class="eta-img-container">
+		<img src="./img/box-top.png" alt="picture of wonton box" class="wonton-box">
 
+	</div>
+	<h2 class="eta-header"> DINA WONTON TILLAGAS!</h2>
+	<p class="time-estimate">ETA 5 MIN</p>
+	<p class="order-id"></p>
+	<div class="eta-button-container">
+		<button class="eta-buttons receipt">SE KVITTO</button>
+		<button class="eta-buttons new-order">GÖR EN NY BESTÄLLNING</button>
+	</div>
+</section>
+
+<section id="receipt-section">
+	<div class="receipt-container">
+	<img src="./svg/logo.svg" alt="YUM YUM GIM MI SUM logo" class="logo">
+	<h2 class="receipt-header">KVITTO</h2>
+	<p class="receipt-id">#hsadjfu</p>
+	<div class="receipt-inner">
+		
+	</div>
+	</div>
+	<div class="receipt-total-container">
+		<div class="receipt-total-inner">
+			<p class="receipt-total-text">TOTALT</p>
+			<p>inkl 20% moms</p>
 		</div>
-		<h2 class="eta-header"> DINA WONTON TILLAGAS!</h2>
-		<p class="time-estimate">ETA 5 MIN</p>
-		<p class="order-id">#sdfsdf</p>
-		<div class="eta-button-container">
-			<button class="eta-buttons reciept">SE KVITTO</button>
-			<button class="eta-buttons new-order">GÖR EN NY BESTÄLLNING</button>
-		</div>
-	</section>
+		<p class="receipt-total">120SEK</p>
+	</div>
+	<button class="receipt-new-order">GÖR EN NY BESTÄLLNING</button>
+</section>
 </body>
 </html>
