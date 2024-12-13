@@ -44,6 +44,12 @@
 	font-weight: bold;
 	color: var(--mainWhite);
 	padding: 1.5rem;
+	transition: scale 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.eta-buttons:hover{
+	scale: 1.05;
 }
 
 .eta-buttons.receipt{
