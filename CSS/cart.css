@@ -65,6 +65,10 @@
 	cursor: pointer;
 }
 
+.add-button:hover, .remove-button:hover{
+	background-color: #898888;
+}
+
 .cart-bottom-container{
 	display: flex;
 	flex-direction: column;
@@ -100,6 +104,11 @@
 	font-weight: bold;
 	color: var(--mainWhite);
 	padding: 1.8rem;
+	transition: scale 0.2s ease-in-out;
+}
+
+.pay-button:hover{
+	scale: 1.05;
 }
 
 .active{
@@ -115,5 +124,10 @@
 	border: 2px solid var(--darkGray);
 	border-radius: 0.5rem;
 	cursor: pointer;
+	transition: scale 0.2s ease-in-out;
+}
+
+.cart-return-button:hover{
+	scale: 1.1;
 }
 
