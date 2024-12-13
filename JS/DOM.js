@@ -128,6 +128,7 @@ function updateEta(data){
 
 	orderIdElement.innerText =`#${orderId}`;
 	etaElement.innerText = `ETA: ${minutesLeft} MIN`;
+	handleReceipt(lastOrderData);
 
 }
 
@@ -138,6 +139,7 @@ function resetOrder(){
 	updateCart();
 	hideEta();
 	showMenu();
+	hideReciept();
 }
 
 
@@ -177,6 +179,7 @@ function handleButtons() {
 const payButton = document.querySelector('.pay-button')
 const newOrderButton = document.querySelector('.new-order')
 const receiptButton = document.querySelector('.receipt')
+const receiptResetBUtton = document.querySelector('.receipt-new-order')
 
 payButton.addEventListener('click', () => {
 	handleOrder();
@@ -184,12 +187,15 @@ payButton.addEventListener('click', () => {
 
 newOrderButton.addEventListener('click', () => {
 	resetOrder();
-})
+});
 
 receiptButton.addEventListener('click', () => {
-	handleReceipt(lastOrderData);
 	showReciept();
-	hideEta
+	hideEta();
+});
+
+receiptResetBUtton.addEventListener('click', () => {
+	resetOrder()
 })
 
 //Switching between different views
