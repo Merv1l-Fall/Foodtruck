@@ -58,7 +58,7 @@ async function placeOrder(cartManager){
 		
 		const data = await response.json();
 		console.log('Order placed sucsessfully', data);
-		return {data, orderId: data.order.id};
+		return data;
 	}
 
 	catch(error){
@@ -67,7 +67,9 @@ async function placeOrder(cartManager){
 	}
 };
 
-async function getReceipt(orderId) {
+async function getReceipt(data) {
+	const orderId = data.order.id;
+	console.log('orderId:', orderId)
 	try{
 		const options = {
 			method: 'GET',
@@ -77,13 +79,13 @@ async function getReceipt(orderId) {
 			}
 		}
 
-		const response = await fetch(`${apiUrl}${tenant}/receipts/${orderId}`, options)
+		const response = await fetch(`${apiUrl}/receipts/${orderId}`, options)
 
 		if(!response.ok) {
 			throw new Error(`HTTP Error ${response.status}`)
 		}
-		const data = await response.json();
-		return data
+		const receiptData = await response.json();
+		return receiptData
 		
 	}
 	catch(error){

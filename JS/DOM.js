@@ -1,6 +1,6 @@
 import { getMenuItems, placeOrder } from "./fetching.js";
 import { cartManager, updateCart } from './cart.js';
-import { handleReceipt } from "./receipt.js";
+import { handleReceipt } from "/js/receipt.js";
 
 
 
@@ -174,7 +174,7 @@ function handleButtons() {
 
 const payButton = document.querySelector('.pay-button')
 const newOrderButton = document.querySelector('.new-order')
-const receiptButton = document.querySelector('receipt')
+const receiptButton = document.querySelector('.receipt')
 
 payButton.addEventListener('click', () => {
 	handleOrder();
