@@ -1,4 +1,4 @@
-import { getReceipt } from "/fetching.js";
+import { getReceipt } from "./fetching.js";
 
 export async function handleReceipt(data) {
 	console.log('handling data for receipt', data)
