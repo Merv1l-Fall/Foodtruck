@@ -8,6 +8,7 @@
   	height: 100%;
   	min-height: 100vh;
   	overflow: hidden;
+	justify-content: flex-end;
 }
 
 .receipt-container{
@@ -101,4 +102,10 @@
 	padding: 1.5rem;
 	width: 100%;
 	margin-top: 2rem;
+	transition: scale 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.receipt-new-order:hover{
+	scale: 1.05;
 }
