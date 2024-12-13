@@ -24,6 +24,11 @@
 	cursor: pointer;
 }
 
+.cart-button:hover{
+	scale: 1.1;
+	transition: scale 0.2s ease-in-out;
+}
+
 .total-items{
 	background-color: var(--mainRed);
 	color: var(--mainWhite);
@@ -64,6 +69,17 @@
 	cursor: pointer;
 }
 
+.menu-item:hover, .submenu-item:hover{
+	background-color: var(--darkGray);
+}
+
+.menu-item:first-child{
+	border-radius: 0.3rem 0.3rem 0 0;
+}
+.menu-item:last-child{
+	border-radius:0 0 0.3rem 0.3rem;
+}
+
 .menu-item:not(:last-child){
 	border-bottom: dotted 1.5px rgba(255, 255, 255, 0.329);
 }
@@ -93,7 +109,7 @@
 .submenu-item{
 	border: none;
 	color: var(--mainWhite);
-	background-color: var(--lightGray2);
+	background-color: #898383;
 	padding: 0.5rem;
 	border-radius: 0.4rem;
 	font-size: 14px;
@@ -116,7 +132,11 @@
 	padding-top: 1rem;
 }
 
-.selected{
-	background-color: var(--darkGray);
+@media (hover: none) {
+    .menu-item:hover{
+        background-color: initial; /* Remove hover styles */
+    }
+	.submenu-item:hover{
+		background-color: #898383;
+	}
 }
-

@@ -1,5 +1,9 @@
 body{
 	height: 100%;
+	max-width: 700px;
+	margin: auto;
+	background-color: var(--mainGreen);
+	
 }
 
 *{
@@ -13,7 +17,7 @@ body{
 :root{
 	--mainGreen:#489078;
 	--lightGray:#605858;
-	--lightGray2:#adacac;
+	--lightGray2:#958d8d;
 	--darkGray:#353131;
 	--mainWhite:#e9e8e5;
 	--mainRed:#EB5757;
@@ -26,3 +30,21 @@ body{
 .total-items.display-none{
 	display: none;
 }
+
+.green{
+	background-color: var(--mainGreen);
+}
+
+.gray{
+	background-color: var(--darkGray);
+}
+
+.light-gray{
+	background-color: var(--lightGray);
+}
+
+.white{
+	background-color: var(--mainWhite);
+}
+
+

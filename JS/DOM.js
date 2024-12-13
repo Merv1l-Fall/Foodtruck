@@ -1,6 +1,7 @@
 import { getMenuItems, placeOrder } from "./fetching.js";
 import { cartManager, updateCart } from './cart.js';
 import { handleReceipt } from "/js/receipt.js";
+import { animateToCart } from "/js/animation.js";
 
 
 
@@ -14,7 +15,6 @@ let lastOrderData = null;
 async function fetchMenuItems(type) {
 	const Url = `https://fdnzawlcf6.execute-api.eu-north-1.amazonaws.com/menu?type=${type}`;
 	const items = await getMenuItems(Url);
-	// console.log(items);
 
 	if(type == wonton && items.length > 0){
 		createMenu(items);
@@ -42,14 +42,14 @@ function createMenu(items){
 			const menuItemInner = document.createElement('div');
 			menuItemInner.classList.add('menu-item-inner');
 			
-			const nameElement = document.createElement('p');
+			const nameElement = document.createElement('span');
 			nameElement.classList.add('item-name')
 			nameElement.innerText = item.name;
 			
 			const dottedDivider = document.createElement('div');
 			dottedDivider.classList.add('dotted-divider');
 		
-			const priceElement = document.createElement('p');
+			const priceElement = document.createElement('span');
 			priceElement.innerText = `${item.price} SEK`;
 			priceElement.classList.add('item-price')
 		
@@ -57,7 +57,7 @@ function createMenu(items){
 			menuItemInner.appendChild(dottedDivider);
 			menuItemInner.appendChild(priceElement)
 		
-			const ingredientsElement = document.createElement('p');
+			const ingredientsElement = document.createElement('span');
 			ingredientsElement.classList.add('ingredients')
 			ingredientsElement.innerText = item.ingredients.join(', ');
 		
@@ -140,7 +140,10 @@ function resetOrder(){
 	hideEta();
 	showMenu();
 	hideReciept();
-}
+	document.body.classList.forEach(className =>{
+		document.body.classList.remove(className);
+	} );
+};
 
 
 //Buttons
@@ -158,6 +161,7 @@ function handleButtons() {
 
 		cartManager.addItem(itemName, price, itemType, itemId);
 
+		animateToCart(button);
 		updateCart();
 	  });
 	});
@@ -170,7 +174,7 @@ function handleButtons() {
 		const itemId = targetButton.dataset.id;
 
 		cartManager.addItem(itemName, price, "wonton", itemId)
-
+		animateToCart(button);
 		updateCart();
 	  });
 	});
@@ -210,6 +214,9 @@ const cartReturnButton = document.querySelector('.cart-return-button');
 function showEta(){
 	cartSection.classList.remove('display-flex')
 	etaSection.classList.add('display-flex')
+
+	document.body.classList.remove('white')
+	document.body.classList.add('light-gray')
 }
 
 function hideEta(){
@@ -231,11 +238,13 @@ function hideReciept(){
 cartReturnButton.addEventListener('click', () => {
  cartSection.classList.remove('display-flex')
  menuSection.classList.add('display-flex')
+
+ document.body.classList.remove('white')
 })
 cartButton.addEventListener('click', () => {
 	cartSection.classList.add('display-flex')
 	menuSection.classList.remove('display-flex')
-
+	document.body.classList.add('white')
 })
 
 
