@@ -22,11 +22,11 @@
 	background-color: var(--mainWhite);
 	position: relative;
 	cursor: pointer;
+	transition: scale 0.2s ease-in-out;
 }
 
 .cart-button:hover{
 	scale: 1.1;
-	transition: scale 0.2s ease-in-out;
 }
 
 .total-items{
