@@ -1,7 +1,7 @@
 import { getMenuItems, placeOrder } from "./fetching.js";
 import { cartManager, updateCart } from './cart.js';
 import { handleReceipt } from "./receipt.js";
-import { animateToCart } from "./animation.js";
+import { animateToCart } from "./js/animation.js";
 
 
 
