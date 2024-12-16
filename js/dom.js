@@ -241,6 +241,8 @@ cartButton.addEventListener("click", () => {
 	document.body.classList.add("white");
 });
 
+
+// load on startup
 async function loadMenu() {
 	await fetchMenuItems(wonton);
 	await fetchMenuItems(drink);

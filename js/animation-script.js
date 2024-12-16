@@ -10,7 +10,7 @@ export function animateToCart(buttonElement) {
 
 	clone.style.position = "absolute";
 	clone.style.zIndex = "1000";
-	clone.style.top = `${itemRect.top + window.scrollY}px`; // Account for scrolling
+	clone.style.top = `${itemRect.top + window.scrollY}px`; 
 	clone.style.left = `${itemRect.left + window.scrollX}px`;
 	clone.style.width = `${itemRect.width}px`;
 	clone.style.height = `${itemRect.height}px`;
@@ -29,7 +29,6 @@ export function animateToCart(buttonElement) {
 		clone.style.transition =
 			"transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s";
 
-		// Fade out and clean up
 		setTimeout(() => {
 			clone.style.opacity = "0";
 		}, 400);

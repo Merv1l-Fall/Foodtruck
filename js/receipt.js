@@ -45,8 +45,7 @@ export async function handleReceipt(data) {
 				receiptItem.appendChild(receiptItemInner);
 				receiptItem.appendChild(receiptAmount);
 
-				const receiptContainer =
-					document.querySelector(".receipt-inner");
+				const receiptContainer = document.querySelector(".receipt-inner");
 				receiptContainer.appendChild(receiptItem);
 
 				const receiptTotal = document.querySelector(".receipt-total");
